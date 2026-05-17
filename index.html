@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Bamboo Principle — Family Wealth Architecture</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dim: #8a6f30;
+    --ink: #0D0D0D;
+    --parchment: #F5F0E8;
+    --cream: #FAF7F2;
+    --charcoal: #1A1A1A;
+    --mid: #3a3a3a;
+    --muted: #888;
+    --border: rgba(201,168,76,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--ink);
+    color: var(--parchment);
+    font-family: 'Cormorant Garamond', serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 60px 24px 100px;
+  }
+
+  /* HEADER */
+  .crest {
+    text-align: center;
+    margin-bottom: 60px;
+    animation: fadeDown 1s ease both;
+  }
+
+  .crest-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+
+  .crest-line::before,
+  .crest-line::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold));
+    max-width: 120px;
+  }
+
+  .crest-line::after {
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  .crest-emblem {
+    font-size: 28px;
+    color: var(--gold);
+  }
+
+  .family-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+    color: var(--parchment);
+    margin-bottom: 8px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 12px;
+  }
+
+  /* OPENING PRINCIPLE */
+  .principle-block {
+    border-left: 3px solid var(--gold);
+    padding: 28px 32px;
+    background: rgba(201,168,76,0.04);
+    margin: 48px 0;
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
+
+  .principle-block p {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    font-weight: 300;
+    color: var(--parchment);
+  }
+
+  .principle-block p + p {
+    margin-top: 16px;
+  }
+
+  .principle-block strong {
+    color: var(--gold-light);
+    font-weight: 600;
+  }
+
+  /* SECTION HEADERS */
+  .section {
+    margin: 64px 0 32px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .section-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 8px;
+  }
+
+  .section h2 {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 300;
+    color: var(--parchment);
+    line-height: 1.2;
+  }
+
+  .section h2 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .section-intro {
+    margin-top: 16px;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #bbb;
+    font-weight: 300;
+  }
+
+  /* DIVIDER */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 48px 0;
+    opacity: 0.4;
+  }
+
+  .divider::before,
+  .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .divider span {
+    font-size: 12px;
+    color: var(--gold);
+  }
+
+  /* STRUCTURE CARDS */
+  .structures {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-top: 32px;
+  }
+
+  .card {
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.02);
+    padding: 36px 32px;
+    position: relative;
+    transition: border-color 0.3s, background 0.3s;
+    animation: fadeUp 0.7s ease both;
+  }
+
+  .card:hover {
+    border-color: rgba(201,168,76,0.5);
+    background: rgba(201,168,76,0.04);
+  }
+
+  .card-number {
+    position: absolute;
+    top: -14px;
+    left: 32px;
+    background: var(--ink);
+    padding: 0 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--gold-light);
+    margin-bottom: 6px;
+  }
+
+  .card-role {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .card-body {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: #ccc;
+    font-weight: 300;
+  }
+
+  .card-body strong {
+    color: var(--parchment);
+    font-weight: 600;
+  }
+
+  .card-why {
+    margin-top: 20px;
+    padding: 16px 20px;
+    background: rgba(201,168,76,0.06);
+    border-left: 2px solid var(--gold-dim);
+  }
+
+  .card-why-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .card-why p {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: #bbb;
+    font-style: italic;
+  }
+
+  .card-mechanics {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .mechanic {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 0.95rem;
+    color: #bbb;
+    line-height: 1.6;
+  }
+
+  .mechanic::before {
+    content: '→';
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* FLOW DIAGRAM */
+  .flow {
+    margin: 32px 0;
+    padding: 36px 32px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.015);
+  }
+
+  .flow-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    text-align: center;
+  }
+
+  .flow-row {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .flow-box {
+    flex: 1;
+    min-width: 100px;
+    text-align: center;
+    padding: 16px 12px;
+    border: 1px solid var(--border);
+    position: relative;
+  }
+
+  .flow-box-label {
+    font-size: 0.7rem;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 2px;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .flow-box-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--gold-light);
+  }
+
+  .flow-box-name {
+    font-size: 0.8rem;
+    color: #999;
+    margin-top: 4px;
+    font-style: italic;
+  }
+
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    padding: 0 4px;
+    color: var(--gold-dim);
+    font-size: 20px;
+  }
+
+  /* COMMANDMENTS */
+  .commandments {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .commandment {
+    display: flex;
+    gap: 24px;
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .commandment:last-child {
+    border-bottom: none;
+  }
+
+  .cmd-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold-dim);
+    padding-top: 4px;
+    flex-shrink: 0;
+    width: 24px;
+  }
+
+  .cmd-text {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: #ccc;
+  }
+
+  .cmd-text strong {
+    color: var(--parchment);
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+  }
+
+  /* CLOSING */
+  .closing {
+    margin-top: 80px;
+    text-align: center;
+    padding: 48px 32px;
+    border: 1px solid var(--border);
+    background: rgba(201,168,76,0.03);
+  }
+
+  .closing-quote {
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--parchment);
+    font-weight: 300;
+    margin-bottom: 16px;
+  }
+
+  .closing-attr {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card:nth-child(1) { animation-delay: 0.1s; }
+  .card:nth-child(2) { animation-delay: 0.2s; }
+  .card:nth-child(3) { animation-delay: 0.3s; }
+  .card:nth-child(4) { animation-delay: 0.4s; }
+  .card:nth-child(5) { animation-delay: 0.5s; }
+  .card:nth-child(6) { animation-delay: 0.6s; }
+
+  .commandment:nth-child(1) { animation-delay: 0.1s; }
+  .commandment:nth-child(2) { animation-delay: 0.2s; }
+  .commandment:nth-child(3) { animation-delay: 0.3s; }
+  .commandment:nth-child(4) { animation-delay: 0.4s; }
+  .commandment:nth-child(5) { animation-delay: 0.5s; }
+  .commandment:nth-child(6) { animation-delay: 0.6s; }
+  .commandment:nth-child(7) { animation-delay: 0.7s; }
+
+  @media (max-width: 600px) {
+    .wrapper { padding: 40px 16px 80px; }
+    .card { padding: 28px 20px; }
+    .flow-row { flex-direction: column; align-items: center; }
+    .flow-arrow { transform: rotate(90deg); }
+    .principle-block { padding: 20px 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <div class="crest">
+    <div class="family-tag">A Blueprint for Generational Wealth</div>
+    <div class="crest-line"><span class="crest-emblem">⬡</span></div>
+    <h1>The <em>Bamboo</em> Principle</h1>
+    <p class="subtitle">Family Wealth Architecture — How to Build a Family That Keeps What It Earns</p>
+  </div>
+
+  <!-- OPENING PRINCIPLE -->
+  <div class="principle-block">
+    <p>
+      In Nigeria and across the world, we have watched men make millions — musicians, contractors, business owners, athletes — and die with nothing. Not because they didn't earn. Because they were always the <strong>monkey</strong>. Working, performing, grinding. But the <strong>bamboo</strong> — the structure that owns the system — quietly collected a percentage of everything, forever.
+    </p>
+    <p>
+      The goal of family wealth architecture is this: <strong>no matter what event, season, deal, or income stream your family touches — the family as a unit keeps a percentage.</strong> Before bills. Before celebration. Before anyone sees the number. The bamboo eats first.
+    </p>
+  </div>
+
+  <div class="divider"><span>◆</span></div>
+
+  <!-- CORE PHILOSOPHY -->
+  <div class="section">
+    <div class="section-tag">Foundation</div>
+    <h2>The <em>Three Laws</em> of Family Capital</h2>
+    <p class="section-intro">Before structures, rules. These laws govern everything else. Break them and no structure will save you.</p>
+  </div>
+
+  <div class="commandments">
+    <div class="commandment">
+      <span class="cmd-num">01</span>
+      <div class="cmd-text">
+        <strong>The Family Takes Its Cut Before Anyone Else Does</strong>
+        Income enters. Before you pay rent, vendors, staff, or yourself — a fixed percentage leaves immediately into a family capital account. This is non-negotiable. Not a savings goal. A structural extraction.
+      </div>
+    </div>
+    <div class="commandment">
+      <span class="cmd-num">02</span>
+      <div class="cmd-text">
+        <strong>Capital Buys Assets. Assets Generate Income. Income Buys More Assets.</strong>
+        The family capital pool is never spent on consumption. It is deployed into income-generating structures. The output of those structures feeds back into the pool. This is the compounding loop.
+      </div>
+    </div>
+    <div class="commandment">
+      <span class="cmd-num">03</span>
+      <div class="cmd-text">
+        <strong>The System Outlives the Earner</strong>
+        If you stop earning tomorrow, the family structures must still pay out. This is the test of whether you've built bamboo or are still a monkey. Legacy is not memory — it is cashflow after death.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"><span>◆</span></div>
+
+  <!-- MONEY SPLIT -->
+  <div class="section">
+    <div class="section-tag">The Extraction Model</div>
+    <h2>How Every <em>Naira</em> Gets Split</h2>
+    <p class="section-intro">Before money touches lifestyle, it passes through this filter. Every income stream — business, salary, side hustle, gift — follows the same law.</p>
+  </div>
+
+  <div class="flow">
+    <div class="flow-title">Income Allocation Architecture</div>
+    <div class="flow-row">
+      <div class="flow-box">
+        <div class="flow-box-label">Income</div>
+        <div class="flow-box-value">100%</div>
+        <div class="flow-box-name">All sources</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box" style="border-color: rgba(201,168,76,0.6); background: rgba(201,168,76,0.07);">
+        <div class="flow-box-label">Family Capital</div>
+        <div class="flow-box-value" style="color:#E8C97A;">10–20%</div>
+        <div class="flow-box-name">Bamboo Fund — first</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">
+        <div class="flow-box-label">Business / Ops</div>
+        <div class="flow-box-value">40–50%</div>
+        <div class="flow-box-name">Fuel growth</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">
+        <div class="flow-box-label">Lifestyle</div>
+        <div class="flow-box-value">30–40%</div>
+        <div class="flow-box-name">Living expenses</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="principle-block" style="margin-top: 0;">
+    <p>
+      The bamboo percentage is <strong>not adjusted when times are hard.</strong> It is the one fixed variable. In lean months you reduce lifestyle spend. You never reduce the family capital extraction. That discipline, compounded over years, is the entire mechanism.
+    </p>
+  </div>
+
+  <div class="divider"><span>◆</span></div>
+
+  <!-- STRUCTURES -->
+  <div class="section">
+    <div class="section-tag">The Architecture</div>
+    <h2>Six <em>Structures</em> to Build</h2>
+    <p class="section-intro">Each structure plays a specific role. Together they form a wall around family wealth that inflation, events, and individual mistakes cannot easily breach.</p>
+  </div>
+
+  <div class="structures">
+
+    <div class="card">
+      <div class="card-number">Structure 01</div>
+      <div class="card-title">The Family Capital Account</div>
+      <div class="card-role">The Bamboo Pool — Foundation of All Structures</div>
+      <div class="card-body">
+        A dedicated bank account — separate from any personal or business account — that receives its fixed percentage of every income that enters your household. No debit card. High friction to withdraw. Both spouses have visibility but withdrawals require agreement.
+        <div class="card-mechanics">
+          <div class="mechanic">Automate the transfer on the same day income lands — before you see the balance</div>
+          <div class="mechanic">Use a bank different from your main account to reduce temptation</div>
+          <div class="mechanic">Target balance: 6 months of household expenses before deploying into any structure</div>
+          <div class="mechanic">In Nigeria: Stanbic, Zenith, or a USD-denominated account at Piggyvest/Risevest for dollar savings</div>
+        </div>
+      </div>
+      <div class="card-why">
+        <div class="card-why-label">Why This Structure</div>
+        <p>Without a physical, separate pool, "family savings" lives only in intention. Money in your main account gets spent. Separation creates the psychological and mechanical barrier that makes bamboo real. This is where all other structures are funded from.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-number">Structure 02</div>
+      <div class="card-title">Real Estate — The Anchor Asset</div>
+      <div class="card-role">Inflation Hedge + Passive Income Engine</div>
+      <div class="card-body">
+        Land or property acquired with capital from the family pool. Specifically: income-generating real estate — shortlet apartments, commercial plots, or buy-to-rent residential. Not your primary home. A home you live in is a liability. Property that pays you monthly is an asset.
+        <div class="card-mechanics">
+          <div class="mechanic">Start with land in a growth corridor — Woji, Rumuola, Eliozu in Port Harcourt currently hold strong ROI</div>
+          <div class="mechanic">Convert to shortlet or rent upon development — rental income feeds back into the capital pool</div>
+          <div class="mechanic">Document everything in both spouses' names from day one</div>
+          <div class="mechanic">Target: one income-generating property per 3–5 years of capital accumulation</div>
+        </div>
+      </div>
+      <div class="card-why">
+        <div class="card-why-label">Why This Structure</div>
+        <p>In a naira-devaluing economy, land holds value in dollar terms. It cannot be inflated away. It pays monthly. It can be passed to children. And unlike businesses, it doesn't require your daily attention — it is structurally bamboo.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-number">Structure 03</div>
+      <div class="card-title">A Family Business Entity</div>
+      <div class="card-role">Tax Efficiency + Wealth Vehicle</div>
+      <div class="card-body">
+        A registered company — even a simple business name or LLC — held in the family's name, not yours personally. Contracts, assets, and income streams route through it. This is not for ego. It is for legal protection, tax structuring, and the ability to transfer ownership to your children without probate complications.
+        <div class="card-mechanics">
+          <div class="mechanic">Register with CAC — a family holding company or a named LLC (e.g. "[Surname] Ventures Ltd")</div>
+          <div class="mechanic">Use it to hold real estate, investments, and operating businesses</div>
+          <div class="mechanic">Pay yourself a salary from it — separates personal from business wealth legally</div>
+          <div class="mechanic">Build financial statements annually — this is the record your children inherit</div>
+        </div>
+      </div>
+      <div class="card-why">
+        <div class="card-why-label">Why This Structure</div>
+        <p>Most Nigerian family wealth dies with the patriarch because it was held personally. A company survives death. Ownership transfers via shares, not drama. It also protects assets if you face personal liability — creditors can't easily reach what the company owns.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-number">Structure 04</div>
+      <div class="card-title">Dollar-Denominated Investments</div>
+      <div class="card-role">Currency Shield + Growth Engine</div>
+      <div class="card-body">
+        A portion of the family capital pool — minimum 20–30% — held in dollar assets. This protects the family from naira devaluation. As the naira weakens, the dollar value of your portfolio rises in naira terms automatically, preserving purchasing power across generations.
+        <div class="card-mechanics">
+          <div class="mechanic">Risevest, Bamboo, or Trove for US stocks and ETFs from Nigeria</div>
+          <div class="mechanic">S&P 500 index fund as the core holding — broad, diversified, historically proven</div>
+          <div class="mechanic">Dollar-denominated fixed income: Eurobonds or USD money market on Risevest</div>
+          <div class="mechanic">Never hold more than 60% of family capital in naira instruments long-term</div>
+        </div>
+      </div>
+      <div class="card-why">
+        <div class="card-why-label">Why This Structure</div>
+        <p>Between 2015 and 2024, the naira lost over 90% of its value. Every naira-only family wealth strategy was quietly destroyed. Families that held dollar assets — even partially — survived. Currency diversification is not optional for Nigerian wealth building. It is the wall.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-number">Structure 05</div>
+      <div class="card-title">The Family Emergency Reserve</div>
+      <div class="card-role">Crisis Absorber — Protects All Other Structures</div>
+      <div class="card-body">
+        A liquid reserve — cash or near-cash — equal to 6–12 months of total family expenses. Held separately from the capital pool. Accessible within 24–48 hours. This fund exists to absorb medical emergencies, job loss, business failure, or family crises — without touching investments or selling assets.
+        <div class="card-mechanics">
+          <div class="mechanic">Target: 6 months expenses minimum before aggressively investing</div>
+          <div class="mechanic">Hold in high-yield money market: Cowrywise, ARM, or Stanbic Money Market Fund</div>
+          <div class="mechanic">Do not count this as part of your investment portfolio</div>
+          <div class="mechanic">Replenish immediately if ever drawn down — before resuming capital contributions</div>
+        </div>
+      </div>
+      <div class="card-why">
+        <div class="card-why-label">Why This Structure</div>
+        <p>Without this, every crisis becomes a forced sale of your best assets at the worst time. Most family wealth destruction happens not through bad investing but through emergencies that force liquidation. This fund is the moat around your bamboo structures. It buys time.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-number">Structure 06</div>
+      <div class="card-title">Children's Education & Capital Fund</div>
+      <div class="card-role">Generational Transfer Vehicle</div>
+      <div class="card-body">
+        A dedicated fund — started at birth or marriage — that compounds over time and is transferred to each child at a defined milestone (graduation, first business, marriage). Not a gift. A capital transfer with conditions attached. This is how bamboo reproduces — each child inherits not just money but the structure to grow it.
+        <div class="card-mechanics">
+          <div class="mechanic">Open a separate account per child from birth — even ₦5,000/month compounds significantly over 18 years</div>
+          <div class="mechanic">Invest in dollar-denominated assets for maximum compounding against inflation</div>
+          <div class="mechanic">Attach a family wealth document — values, rules, and principles — to every capital transfer</div>
+          <div class="mechanic">Teach the bamboo principle to children from age 8 — the system only survives if they understand it</div>
+        </div>
+      </div>
+      <div class="card-why">
+        <div class="card-why-label">Why This Structure</div>
+        <p>Generational wealth fails in generation two because money was transferred without the philosophy. Your children need capital AND the mental operating system to protect it. This structure ensures both. Wealth without wisdom becomes a liability in the next generation's hands.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="divider"><span>◆</span></div>
+
+  <!-- FAMILY COMMANDMENTS -->
+  <div class="section">
+    <div class="section-tag">The Rules</div>
+    <h2>Seven <em>Commandments</em> of the Bamboo Family</h2>
+    <p class="section-intro">These are the operating principles your household runs on. Both partners must agree to them — written, discussed, and revisited annually.</p>
+  </div>
+
+  <div class="commandments">
+    <div class="commandment">
+      <span class="cmd-num">I</span>
+      <div class="cmd-text">
+        <strong>We Pay the Family First</strong>
+        Before lifestyle, celebration, or generosity to others — the family capital extraction happens. Always. The bamboo eats before the monkey plays.
+      </div>
+    </div>
+    <div class="commandment">
+      <span class="cmd-num">II</span>
+      <div class="cmd-text">
+        <strong>We Do Not Rescue Others at the Cost of Our Structures</strong>
+        Extended family pressure is the single greatest destroyer of middle-class Nigerian wealth. Generosity is honoured — but never from capital funds. Only from a pre-allocated "giving" portion of lifestyle income.
+      </div>
+    </div>
+    <div class="commandment">
+      <span class="cmd-num">III</span>
+      <div class="cmd-text">
+        <strong>Both Partners Have Full Visibility</strong>
+        No financial secrets between spouses. Both see all accounts, all balances, all deployments. Wealth hidden from a spouse is wealth one signature away from chaos.
+      </div>
+    </div>
+    <div class="commandment">
+      <span class="cmd-num">IV</span>
+      <div class="cmd-text">
+        <strong>We Review the Architecture Every 12 Months</strong>
+        Annual family financial meeting. Check what's working, what's underperforming, and what needs rebalancing. This is a family board meeting — not an argument about money.
+      </div>
+    </div>
+    <div class="commandment">
+      <span class="cmd-num">V</span>
+      <div class="cmd-text">
+        <strong>Lifestyle Inflates Only After Structures Are Funded</strong>
+        As income grows, the first beneficiary is the capital extraction — not the car, not the rent upgrade. Structures scale first. Lifestyle scales second.
+      </div>
+    </div>
+    <div class="commandment">
+      <span class="cmd-num">VI</span>
+      <div class="cmd-text">
+        <strong>We Document Everything</strong>
+        Every asset, every account, every investment — written, filed, and known by both partners. Death or incapacity should not create confusion. Your estate plan begins today, not when you are old.
+      </div>
+    </div>
+    <div class="commandment">
+      <span class="cmd-num">VII</span>
+      <div class="cmd-text">
+        <strong>We Teach the Children the System</strong>
+        Wealth is not passed. Systems are passed. Children who understand the bamboo principle before they are adults become the second generation that grows the wealth rather than spending it. This is the only true legacy.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"><span>◆</span></div>
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <div class="closing-quote">
+      "The monkey performs at every event.<br>The bamboo collects at every event.<br>Build your family into the bamboo.<br>Then teach your children to plant more."
+    </div>
+    <div class="closing-attr">The Bamboo Principle — Family Wealth Architecture</div>
+  </div>
+
+</div>
+</body>
+</html>
