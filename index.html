@@ -1,772 +1,1005 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Bamboo Principle — Family Wealth Architecture</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --gold: #C9A84C;
-    --gold-light: #E8C97A;
-    --gold-dim: #8a6f30;
-    --ink: #0D0D0D;
-    --parchment: #F5F0E8;
-    --cream: #FAF7F2;
-    --charcoal: #1A1A1A;
-    --mid: #3a3a3a;
-    --muted: #888;
-    --border: rgba(201,168,76,0.25);
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Architecture of Money & Wealth</title>
+    <style>
+        :root {
+            --gold: #c9a84c;
+            --gold-light: #e8d5a3;
+            --dark: #0a0a0a;
+            --dark-secondary: #141414;
+            --dark-tertiary: #1e1e1e;
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666666;
+            --accent-green: #4ade80;
+            --accent-red: #f87171;
+            --border: #2a2a2a;
+        }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  body {
-    background: var(--ink);
-    color: var(--parchment);
-    font-family: 'Cormorant Garamond', serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            background: #0a0a0a;
+            color: #f0f0f0;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
 
-  /* NOISE TEXTURE OVERLAY */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.4;
-  }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #c9a84c; border-radius: 4px; }
 
-  .wrapper {
-    position: relative;
-    z-index: 1;
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 60px 24px 100px;
-  }
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(10,10,10,0.95); backdrop-filter: blur(20px);
+            border-bottom: 1px solid #2a2a2a; padding: 0 2rem;
+        }
+        .nav-inner {
+            max-width: 1400px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center; height: 70px;
+        }
+        .logo {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 1.5rem; font-weight: 700;
+            color: #c9a84c; letter-spacing: 1px;
+        }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a {
+            color: #a0a0a0; text-decoration: none; font-size: 0.85rem;
+            font-weight: 500; text-transform: uppercase; letter-spacing: 1px;
+            transition: color 0.3s; position: relative;
+        }
+        .nav-links a:hover { color: #c9a84c; }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -5px; left: 0;
+            width: 0; height: 2px; background: #c9a84c; transition: width 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
 
-  /* HEADER */
-  .crest {
-    text-align: center;
-    margin-bottom: 60px;
-    animation: fadeDown 1s ease both;
-  }
+        .hero {
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, #0a0a0a 0%, #141414 100%);
+            overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a84c' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+        .hero-content {
+            text-align: center; max-width: 900px; padding: 2rem;
+            position: relative; z-index: 1;
+        }
+        .hero-subtitle {
+            color: #c9a84c; font-size: 0.9rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 4px; margin-bottom: 1.5rem;
+        }
+        .hero-title {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 700; line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #f0f0f0 0%, #e8d5a3 50%, #c9a84c 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .hero-description {
+            font-size: 1.2rem; color: #a0a0a0; max-width: 700px;
+            margin: 0 auto 2rem; line-height: 1.8;
+        }
+        .hero-quote {
+            font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-size: 1.1rem;
+            color: #e8d5a3; border-left: 3px solid #c9a84c;
+            padding-left: 1.5rem; text-align: left; max-width: 600px; margin: 2rem auto;
+        }
+        .scroll-indicator {
+            position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%,20%,50%,80%,100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-20px); }
+            60% { transform: translateX(-50%) translateY(-10px); }
+        }
+        .scroll-indicator svg { width: 30px; height: 30px; stroke: #c9a84c; fill: none; stroke-width: 2; }
 
-  .crest-line {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    margin-bottom: 8px;
-  }
+        .section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-number {
+            color: #c9a84c; font-size: 0.85rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 3px; margin-bottom: 1rem;
+        }
+        .section-title {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; margin-bottom: 1rem;
+        }
+        .section-subtitle { color: #a0a0a0; font-size: 1.1rem; max-width: 700px; margin: 0 auto; }
 
-  .crest-line::before,
-  .crest-line::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold));
-    max-width: 120px;
-  }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .card {
+            background: #141414; border: 1px solid #2a2a2a;
+            border-radius: 12px; padding: 2rem; transition: all 0.4s ease;
+            position: relative; overflow: hidden;
+        }
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+            background: linear-gradient(90deg, #c9a84c, transparent);
+            transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
+        }
+        .card:hover { border-color: #c9a84c; transform: translateY(-5px); box-shadow: 0 20px 40px rgba(201,168,76,0.1); }
+        .card:hover::before { transform: scaleX(1); }
+        .card-icon {
+            width: 50px; height: 50px;
+            background: linear-gradient(135deg, #c9a84c, #e8d5a3);
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            margin-bottom: 1.5rem; font-size: 1.5rem;
+        }
+        .card-title { font-family: Georgia, 'Times New Roman', serif; font-size: 1.3rem; font-weight: 600; margin-bottom: 1rem; }
+        .card-text { color: #a0a0a0; font-size: 0.95rem; line-height: 1.7; }
 
-  .crest-line::after {
-    background: linear-gradient(90deg, var(--gold), transparent);
-  }
+        .table-container { overflow-x: auto; margin: 2rem 0; border-radius: 12px; border: 1px solid #2a2a2a; }
+        table { width: 100%; border-collapse: collapse; background: #141414; }
+        th {
+            background: #1e1e1e; color: #c9a84c; font-weight: 600;
+            text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;
+            padding: 1.2rem 1.5rem; text-align: left; border-bottom: 2px solid #c9a84c;
+        }
+        td { padding: 1.2rem 1.5rem; border-bottom: 1px solid #2a2a2a; color: #a0a0a0; font-size: 0.95rem; }
+        tr:hover td { background: rgba(201,168,76,0.05); color: #f0f0f0; }
+        .comparison-table td:first-child { font-weight: 600; color: #f0f0f0; }
 
-  .crest-emblem {
-    font-size: 28px;
-    color: var(--gold);
-  }
+        .mindset-shift {
+            display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem;
+            align-items: center; padding: 1rem 0; border-bottom: 1px solid #2a2a2a;
+        }
+        .mindset-from { text-align: right; color: #f87171; font-style: italic; }
+        .mindset-arrow { color: #c9a84c; font-size: 1.5rem; text-align: center; }
+        .mindset-to { text-align: left; color: #4ade80; font-weight: 600; }
 
-  .family-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--gold-dim);
-    margin-bottom: 16px;
-  }
+        .styled-list { list-style: none; padding: 0; }
+        .styled-list li {
+            padding: 1rem 0; padding-left: 2rem; position: relative;
+            border-bottom: 1px solid #2a2a2a; color: #a0a0a0;
+        }
+        .styled-list li::before { content: '▸'; position: absolute; left: 0; color: #c9a84c; font-weight: bold; }
 
-  h1 {
-    font-size: clamp(2.4rem, 6vw, 4rem);
-    font-weight: 300;
-    line-height: 1.1;
-    letter-spacing: -0.5px;
-    color: var(--parchment);
-    margin-bottom: 8px;
-  }
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(201,168,76,0.1), rgba(201,168,76,0.05));
+            border: 1px solid #c9a84c; border-radius: 12px; padding: 2rem; margin: 2rem 0;
+            position: relative;
+        }
+        .highlight-box::before {
+            content: ''; position: absolute; top: -1px; left: -1px; right: -1px;
+            height: 3px; background: linear-gradient(90deg, #c9a84c, #e8d5a3);
+            border-radius: 12px 12px 0 0;
+        }
+        .highlight-box p { color: #a0a0a0; font-size: 1.05rem; line-height: 1.8; }
 
-  h1 em {
-    font-style: italic;
-    color: var(--gold-light);
-  }
+        .equation {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: clamp(1.2rem, 3vw, 2rem); text-align: center;
+            padding: 3rem 2rem; background: #141414;
+            border-radius: 12px; border: 1px solid #c9a84c; margin: 2rem 0;
+            position: relative;
+        }
+        .equation .highlight { color: #c9a84c; font-weight: 700; }
+        .equation .negative { color: #f87171; }
 
-  .subtitle {
-    font-size: 1.1rem;
-    font-weight: 300;
-    color: var(--muted);
-    font-style: italic;
-    margin-top: 12px;
-  }
+        .transfer-cycle {
+            display: flex; flex-direction: column; align-items: center; gap: 1rem; padding: 3rem 0;
+        }
+        .cycle-box { padding: 1.5rem 2rem; border-radius: 12px; text-align: center; max-width: 500px; width: 100%; }
+        .cycle-informed { background: linear-gradient(135deg, rgba(74,222,128,0.1), rgba(74,222,128,0.05)); border: 1px solid #4ade80; }
+        .cycle-uninformed { background: linear-gradient(135deg, rgba(248,113,113,0.1), rgba(248,113,113,0.05)); border: 1px solid #f87171; }
+        .cycle-arrow { font-size: 2rem; color: #c9a84c; }
+        .cycle-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem; }
+        .cycle-informed .cycle-label { color: #4ade80; }
+        .cycle-uninformed .cycle-label { color: #f87171; }
 
-  /* OPENING PRINCIPLE */
-  .principle-block {
-    border-left: 3px solid var(--gold);
-    padding: 28px 32px;
-    background: rgba(201,168,76,0.04);
-    margin: 48px 0;
-    animation: fadeUp 0.8s ease 0.2s both;
-  }
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        @media (max-width: 768px) {
+            .two-column { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .mindset-shift { grid-template-columns: 1fr; text-align: center; }
+            .mindset-from, .mindset-to { text-align: center; }
+        }
 
-  .principle-block p {
-    font-size: 1.25rem;
-    line-height: 1.8;
-    font-weight: 300;
-    color: var(--parchment);
-  }
+        .footer {
+            background: #141414; border-top: 1px solid #2a2a2a;
+            padding: 4rem 2rem; text-align: center;
+        }
+        .footer-text { color: #666666; font-size: 0.9rem; max-width: 600px; margin: 0 auto; }
+        .footer-quote {
+            font-family: Georgia, 'Times New Roman', serif; font-style: italic;
+            color: #e8d5a3; font-size: 1.2rem; margin-bottom: 1rem;
+        }
 
-  .principle-block p + p {
-    margin-top: 16px;
-  }
+        html { scroll-behavior: smooth; }
+        .section-alt { background: #141414; }
+        .section-alt .section { max-width: 1200px; margin: 0 auto; }
 
-  .principle-block strong {
-    color: var(--gold-light);
-    font-weight: 600;
-  }
-
-  /* SECTION HEADERS */
-  .section {
-    margin: 64px 0 32px;
-    animation: fadeUp 0.8s ease both;
-  }
-
-  .section-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    color: var(--gold-dim);
-    margin-bottom: 8px;
-  }
-
-  .section h2 {
-    font-size: clamp(1.6rem, 4vw, 2.4rem);
-    font-weight: 300;
-    color: var(--parchment);
-    line-height: 1.2;
-  }
-
-  .section h2 em {
-    font-style: italic;
-    color: var(--gold-light);
-  }
-
-  .section-intro {
-    margin-top: 16px;
-    font-size: 1.05rem;
-    line-height: 1.8;
-    color: #bbb;
-    font-weight: 300;
-  }
-
-  /* DIVIDER */
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin: 48px 0;
-    opacity: 0.4;
-  }
-
-  .divider::before,
-  .divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--gold);
-  }
-
-  .divider span {
-    font-size: 12px;
-    color: var(--gold);
-  }
-
-  /* STRUCTURE CARDS */
-  .structures {
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-    margin-top: 32px;
-  }
-
-  .card {
-    border: 1px solid var(--border);
-    background: rgba(255,255,255,0.02);
-    padding: 36px 32px;
-    position: relative;
-    transition: border-color 0.3s, background 0.3s;
-    animation: fadeUp 0.7s ease both;
-  }
-
-  .card:hover {
-    border-color: rgba(201,168,76,0.5);
-    background: rgba(201,168,76,0.04);
-  }
-
-  .card-number {
-    position: absolute;
-    top: -14px;
-    left: 32px;
-    background: var(--ink);
-    padding: 0 12px;
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 3px;
-    color: var(--gold);
-    text-transform: uppercase;
-  }
-
-  .card-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--gold-light);
-    margin-bottom: 6px;
-  }
-
-  .card-role {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 3px;
-    color: var(--gold-dim);
-    text-transform: uppercase;
-    margin-bottom: 20px;
-  }
-
-  .card-body {
-    font-size: 1rem;
-    line-height: 1.85;
-    color: #ccc;
-    font-weight: 300;
-  }
-
-  .card-body strong {
-    color: var(--parchment);
-    font-weight: 600;
-  }
-
-  .card-why {
-    margin-top: 20px;
-    padding: 16px 20px;
-    background: rgba(201,168,76,0.06);
-    border-left: 2px solid var(--gold-dim);
-  }
-
-  .card-why-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 4px;
-    color: var(--gold-dim);
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-
-  .card-why p {
-    font-size: 0.95rem;
-    line-height: 1.75;
-    color: #bbb;
-    font-style: italic;
-  }
-
-  .card-mechanics {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .mechanic {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    font-size: 0.95rem;
-    color: #bbb;
-    line-height: 1.6;
-  }
-
-  .mechanic::before {
-    content: '→';
-    color: var(--gold);
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-
-  /* FLOW DIAGRAM */
-  .flow {
-    margin: 32px 0;
-    padding: 36px 32px;
-    border: 1px solid var(--border);
-    background: rgba(255,255,255,0.015);
-  }
-
-  .flow-title {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 4px;
-    color: var(--gold-dim);
-    text-transform: uppercase;
-    margin-bottom: 28px;
-    text-align: center;
-  }
-
-  .flow-row {
-    display: flex;
-    align-items: stretch;
-    gap: 0;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .flow-box {
-    flex: 1;
-    min-width: 100px;
-    text-align: center;
-    padding: 16px 12px;
-    border: 1px solid var(--border);
-    position: relative;
-  }
-
-  .flow-box-label {
-    font-size: 0.7rem;
-    font-family: 'DM Mono', monospace;
-    letter-spacing: 2px;
-    color: var(--gold-dim);
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-
-  .flow-box-value {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--gold-light);
-  }
-
-  .flow-box-name {
-    font-size: 0.8rem;
-    color: #999;
-    margin-top: 4px;
-    font-style: italic;
-  }
-
-  .flow-arrow {
-    display: flex;
-    align-items: center;
-    padding: 0 4px;
-    color: var(--gold-dim);
-    font-size: 20px;
-  }
-
-  /* COMMANDMENTS */
-  .commandments {
-    margin-top: 32px;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .commandment {
-    display: flex;
-    gap: 24px;
-    padding: 24px 0;
-    border-bottom: 1px solid rgba(201,168,76,0.1);
-    animation: fadeUp 0.6s ease both;
-  }
-
-  .commandment:last-child {
-    border-bottom: none;
-  }
-
-  .cmd-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--gold-dim);
-    padding-top: 4px;
-    flex-shrink: 0;
-    width: 24px;
-  }
-
-  .cmd-text {
-    font-size: 1.05rem;
-    line-height: 1.75;
-    color: #ccc;
-  }
-
-  .cmd-text strong {
-    color: var(--parchment);
-    display: block;
-    font-size: 1.1rem;
-    margin-bottom: 4px;
-  }
-
-  /* CLOSING */
-  .closing {
-    margin-top: 80px;
-    text-align: center;
-    padding: 48px 32px;
-    border: 1px solid var(--border);
-    background: rgba(201,168,76,0.03);
-  }
-
-  .closing-quote {
-    font-size: clamp(1.3rem, 3vw, 1.8rem);
-    font-style: italic;
-    line-height: 1.6;
-    color: var(--parchment);
-    font-weight: 300;
-    margin-bottom: 16px;
-  }
-
-  .closing-attr {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 4px;
-    color: var(--gold-dim);
-    text-transform: uppercase;
-  }
-
-  /* ANIMATIONS */
-  @keyframes fadeDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .card:nth-child(1) { animation-delay: 0.1s; }
-  .card:nth-child(2) { animation-delay: 0.2s; }
-  .card:nth-child(3) { animation-delay: 0.3s; }
-  .card:nth-child(4) { animation-delay: 0.4s; }
-  .card:nth-child(5) { animation-delay: 0.5s; }
-  .card:nth-child(6) { animation-delay: 0.6s; }
-
-  .commandment:nth-child(1) { animation-delay: 0.1s; }
-  .commandment:nth-child(2) { animation-delay: 0.2s; }
-  .commandment:nth-child(3) { animation-delay: 0.3s; }
-  .commandment:nth-child(4) { animation-delay: 0.4s; }
-  .commandment:nth-child(5) { animation-delay: 0.5s; }
-  .commandment:nth-child(6) { animation-delay: 0.6s; }
-  .commandment:nth-child(7) { animation-delay: 0.7s; }
-
-  @media (max-width: 600px) {
-    .wrapper { padding: 40px 16px 80px; }
-    .card { padding: 28px 20px; }
-    .flow-row { flex-direction: column; align-items: center; }
-    .flow-arrow { transform: rotate(90deg); }
-    .principle-block { padding: 20px 20px; }
-  }
-</style>
+        .transfer-card {
+            background: #1e1e1e; border-radius: 12px;
+            padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #c9a84c;
+        }
+        .transfer-number {
+            color: #c9a84c; font-size: 0.85rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem;
+        }
+        .transfer-title { font-family: Georgia, 'Times New Roman', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; }
+        .transfer-amount { font-size: 2rem; font-weight: 700; color: #c9a84c; margin-bottom: 1rem; }
+        .transfer-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+        .meta-box { padding: 1rem; border-radius: 8px; font-size: 0.9rem; }
+        .meta-win { background: rgba(74,222,128,0.1); border: 1px solid #4ade80; }
+        .meta-lose { background: rgba(248,113,113,0.1); border: 1px solid #f87171; }
+        .meta-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
+        .meta-win .meta-label { color: #4ade80; }
+        .meta-lose .meta-label { color: #f87171; }
+    </style>
 </head>
 <body>
-<div class="wrapper">
-
-  <!-- HEADER -->
-  <div class="crest">
-    <div class="family-tag">A Blueprint for Generational Wealth</div>
-    <div class="crest-line"><span class="crest-emblem">⬡</span></div>
-    <h1>The <em>Bamboo</em> Principle</h1>
-    <p class="subtitle">Family Wealth Architecture — How to Build a Family That Keeps What It Earns</p>
-  </div>
-
-  <!-- OPENING PRINCIPLE -->
-  <div class="principle-block">
-    <p>
-      In Nigeria and across the world, we have watched men make millions — musicians, contractors, business owners, athletes — and die with nothing. Not because they didn't earn. Because they were always the <strong>monkey</strong>. Working, performing, grinding. But the <strong>bamboo</strong> — the structure that owns the system — quietly collected a percentage of everything, forever.
-    </p>
-    <p>
-      The goal of family wealth architecture is this: <strong>no matter what event, season, deal, or income stream your family touches — the family as a unit keeps a percentage.</strong> Before bills. Before celebration. Before anyone sees the number. The bamboo eats first.
-    </p>
-  </div>
-
-  <div class="divider"><span>◆</span></div>
-
-  <!-- CORE PHILOSOPHY -->
-  <div class="section">
-    <div class="section-tag">Foundation</div>
-    <h2>The <em>Three Laws</em> of Family Capital</h2>
-    <p class="section-intro">Before structures, rules. These laws govern everything else. Break them and no structure will save you.</p>
-  </div>
-
-  <div class="commandments">
-    <div class="commandment">
-      <span class="cmd-num">01</span>
-      <div class="cmd-text">
-        <strong>The Family Takes Its Cut Before Anyone Else Does</strong>
-        Income enters. Before you pay rent, vendors, staff, or yourself — a fixed percentage leaves immediately into a family capital account. This is non-negotiable. Not a savings goal. A structural extraction.
-      </div>
-    </div>
-    <div class="commandment">
-      <span class="cmd-num">02</span>
-      <div class="cmd-text">
-        <strong>Capital Buys Assets. Assets Generate Income. Income Buys More Assets.</strong>
-        The family capital pool is never spent on consumption. It is deployed into income-generating structures. The output of those structures feeds back into the pool. This is the compounding loop.
-      </div>
-    </div>
-    <div class="commandment">
-      <span class="cmd-num">03</span>
-      <div class="cmd-text">
-        <strong>The System Outlives the Earner</strong>
-        If you stop earning tomorrow, the family structures must still pay out. This is the test of whether you've built bamboo or are still a monkey. Legacy is not memory — it is cashflow after death.
-      </div>
-    </div>
-  </div>
-
-  <div class="divider"><span>◆</span></div>
-
-  <!-- MONEY SPLIT -->
-  <div class="section">
-    <div class="section-tag">The Extraction Model</div>
-    <h2>How Every <em>Naira</em> Gets Split</h2>
-    <p class="section-intro">Before money touches lifestyle, it passes through this filter. Every income stream — business, salary, side hustle, gift — follows the same law.</p>
-  </div>
-
-  <div class="flow">
-    <div class="flow-title">Income Allocation Architecture</div>
-    <div class="flow-row">
-      <div class="flow-box">
-        <div class="flow-box-label">Income</div>
-        <div class="flow-box-value">100%</div>
-        <div class="flow-box-name">All sources</div>
-      </div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-box" style="border-color: rgba(201,168,76,0.6); background: rgba(201,168,76,0.07);">
-        <div class="flow-box-label">Family Capital</div>
-        <div class="flow-box-value" style="color:#E8C97A;">10–20%</div>
-        <div class="flow-box-name">Bamboo Fund — first</div>
-      </div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-box">
-        <div class="flow-box-label">Business / Ops</div>
-        <div class="flow-box-value">40–50%</div>
-        <div class="flow-box-name">Fuel growth</div>
-      </div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-box">
-        <div class="flow-box-label">Lifestyle</div>
-        <div class="flow-box-value">30–40%</div>
-        <div class="flow-box-name">Living expenses</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="principle-block" style="margin-top: 0;">
-    <p>
-      The bamboo percentage is <strong>not adjusted when times are hard.</strong> It is the one fixed variable. In lean months you reduce lifestyle spend. You never reduce the family capital extraction. That discipline, compounded over years, is the entire mechanism.
-    </p>
-  </div>
-
-  <div class="divider"><span>◆</span></div>
-
-  <!-- STRUCTURES -->
-  <div class="section">
-    <div class="section-tag">The Architecture</div>
-    <h2>Six <em>Structures</em> to Build</h2>
-    <p class="section-intro">Each structure plays a specific role. Together they form a wall around family wealth that inflation, events, and individual mistakes cannot easily breach.</p>
-  </div>
-
-  <div class="structures">
-
-    <div class="card">
-      <div class="card-number">Structure 01</div>
-      <div class="card-title">The Family Capital Account</div>
-      <div class="card-role">The Bamboo Pool — Foundation of All Structures</div>
-      <div class="card-body">
-        A dedicated bank account — separate from any personal or business account — that receives its fixed percentage of every income that enters your household. No debit card. High friction to withdraw. Both spouses have visibility but withdrawals require agreement.
-        <div class="card-mechanics">
-          <div class="mechanic">Automate the transfer on the same day income lands — before you see the balance</div>
-          <div class="mechanic">Use a bank different from your main account to reduce temptation</div>
-          <div class="mechanic">Target balance: 6 months of household expenses before deploying into any structure</div>
-          <div class="mechanic">In Nigeria: Stanbic, Zenith, or a USD-denominated account at Piggyvest/Risevest for dollar savings</div>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <div class="logo">◈ Wealth Architecture</div>
+            <ul class="nav-links">
+                <li><a href="#foundations">Foundations</a></li>
+                <li><a href="#mindset">Mindset</a></li>
+                <li><a href="#leverage">Leverage</a></li>
+                <li><a href="#transfers">Transfers</a></li>
+                <li><a href="#strategy">Strategy</a></li>
+            </ul>
         </div>
-      </div>
-      <div class="card-why">
-        <div class="card-why-label">Why This Structure</div>
-        <p>Without a physical, separate pool, "family savings" lives only in intention. Money in your main account gets spent. Separation creates the psychological and mechanical barrier that makes bamboo real. This is where all other structures are funded from.</p>
-      </div>
-    </div>
+    </nav>
 
-    <div class="card">
-      <div class="card-number">Structure 02</div>
-      <div class="card-title">Real Estate — The Anchor Asset</div>
-      <div class="card-role">Inflation Hedge + Passive Income Engine</div>
-      <div class="card-body">
-        Land or property acquired with capital from the family pool. Specifically: income-generating real estate — shortlet apartments, commercial plots, or buy-to-rent residential. Not your primary home. A home you live in is a liability. Property that pays you monthly is an asset.
-        <div class="card-mechanics">
-          <div class="mechanic">Start with land in a growth corridor — Woji, Rumuola, Eliozu in Port Harcourt currently hold strong ROI</div>
-          <div class="mechanic">Convert to shortlet or rent upon development — rental income feeds back into the capital pool</div>
-          <div class="mechanic">Document everything in both spouses' names from day one</div>
-          <div class="mechanic">Target: one income-generating property per 3–5 years of capital accumulation</div>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-subtitle">A Comprehensive Framework</div>
+            <h1 class="hero-title">The Architecture of<br>Money & Wealth</h1>
+            <p class="hero-description">
+                Understanding how value flows, how leverage multiplies effort, and how the informed systematically extract wealth from the uninformed — not through conspiracy, but through structure.
+            </p>
+            <div class="hero-quote">
+                "The game is not fair. But it is learnable. And the first move is recognizing that you are in it whether you chose to play or not."
+            </div>
         </div>
-      </div>
-      <div class="card-why">
-        <div class="card-why-label">Why This Structure</div>
-        <p>In a naira-devaluing economy, land holds value in dollar terms. It cannot be inflated away. It pays monthly. It can be passed to children. And unlike businesses, it doesn't require your daily attention — it is structurally bamboo.</p>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-number">Structure 03</div>
-      <div class="card-title">A Family Business Entity</div>
-      <div class="card-role">Tax Efficiency + Wealth Vehicle</div>
-      <div class="card-body">
-        A registered company — even a simple business name or LLC — held in the family's name, not yours personally. Contracts, assets, and income streams route through it. This is not for ego. It is for legal protection, tax structuring, and the ability to transfer ownership to your children without probate complications.
-        <div class="card-mechanics">
-          <div class="mechanic">Register with CAC — a family holding company or a named LLC (e.g. "[Surname] Ventures Ltd")</div>
-          <div class="mechanic">Use it to hold real estate, investments, and operating businesses</div>
-          <div class="mechanic">Pay yourself a salary from it — separates personal from business wealth legally</div>
-          <div class="mechanic">Build financial statements annually — this is the record your children inherit</div>
+        <div class="scroll-indicator">
+            <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
         </div>
-      </div>
-      <div class="card-why">
-        <div class="card-why-label">Why This Structure</div>
-        <p>Most Nigerian family wealth dies with the patriarch because it was held personally. A company survives death. Ownership transfers via shares, not drama. It also protects assets if you face personal liability — creditors can't easily reach what the company owns.</p>
-      </div>
-    </div>
+    </section>
 
-    <div class="card">
-      <div class="card-number">Structure 04</div>
-      <div class="card-title">Dollar-Denominated Investments</div>
-      <div class="card-role">Currency Shield + Growth Engine</div>
-      <div class="card-body">
-        A portion of the family capital pool — minimum 20–30% — held in dollar assets. This protects the family from naira devaluation. As the naira weakens, the dollar value of your portfolio rises in naira terms automatically, preserving purchasing power across generations.
-        <div class="card-mechanics">
-          <div class="mechanic">Risevest, Bamboo, or Trove for US stocks and ETFs from Nigeria</div>
-          <div class="mechanic">S&P 500 index fund as the core holding — broad, diversified, historically proven</div>
-          <div class="mechanic">Dollar-denominated fixed income: Eurobonds or USD money market on Risevest</div>
-          <div class="mechanic">Never hold more than 60% of family capital in naira instruments long-term</div>
+    <!-- Foundations -->
+    <section id="foundations" class="section">
+        <div class="section-header">
+            <div class="section-number">01 — Foundations</div>
+            <h2 class="section-title">Core Definitions</h2>
+            <p class="section-subtitle">Before building wealth, you must understand what money, value, and leverage actually are.</p>
         </div>
-      </div>
-      <div class="card-why">
-        <div class="card-why-label">Why This Structure</div>
-        <p>Between 2015 and 2024, the naira lost over 90% of its value. Every naira-only family wealth strategy was quietly destroyed. Families that held dollar assets — even partially — survived. Currency diversification is not optional for Nigerian wealth building. It is the wall.</p>
-      </div>
-    </div>
 
-    <div class="card">
-      <div class="card-number">Structure 05</div>
-      <div class="card-title">The Family Emergency Reserve</div>
-      <div class="card-role">Crisis Absorber — Protects All Other Structures</div>
-      <div class="card-body">
-        A liquid reserve — cash or near-cash — equal to 6–12 months of total family expenses. Held separately from the capital pool. Accessible within 24–48 hours. This fund exists to absorb medical emergencies, job loss, business failure, or family crises — without touching investments or selling assets.
-        <div class="card-mechanics">
-          <div class="mechanic">Target: 6 months expenses minimum before aggressively investing</div>
-          <div class="mechanic">Hold in high-yield money market: Cowrywise, ARM, or Stanbic Money Market Fund</div>
-          <div class="mechanic">Do not count this as part of your investment portfolio</div>
-          <div class="mechanic">Replenish immediately if ever drawn down — before resuming capital contributions</div>
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-icon">&#128176;</div>
+                <h3 class="card-title">What Is Money?</h3>
+                <p class="card-text">A social technology — a medium of exchange, unit of account, and store of value. Money itself is not wealth; it is access to the underlying value that wealth represents.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">&#9889;</div>
+                <h3 class="card-title">What Is Value?</h3>
+                <p class="card-text">Subjective perceived usefulness. Created by solving problems, reducing pain, or increasing pleasure. Three dimensions: functional, emotional, and social value.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">&#128273;</div>
+                <h3 class="card-title">The Cheapest Value</h3>
+                <p class="card-text">Information and knowledge — created once, sold infinitely at near-zero marginal cost. Software, content, and systems are leverage multipliers.</p>
+            </div>
         </div>
-      </div>
-      <div class="card-why">
-        <div class="card-why-label">Why This Structure</div>
-        <p>Without this, every crisis becomes a forced sale of your best assets at the worst time. Most family wealth destruction happens not through bad investing but through emergencies that force liquidation. This fund is the moat around your bamboo structures. It buys time.</p>
-      </div>
-    </div>
 
-    <div class="card">
-      <div class="card-number">Structure 06</div>
-      <div class="card-title">Children's Education & Capital Fund</div>
-      <div class="card-role">Generational Transfer Vehicle</div>
-      <div class="card-body">
-        A dedicated fund — started at birth or marriage — that compounds over time and is transferred to each child at a defined milestone (graduation, first business, marriage). Not a gift. A capital transfer with conditions attached. This is how bamboo reproduces — each child inherits not just money but the structure to grow it.
-        <div class="card-mechanics">
-          <div class="mechanic">Open a separate account per child from birth — even ₦5,000/month compounds significantly over 18 years</div>
-          <div class="mechanic">Invest in dollar-denominated assets for maximum compounding against inflation</div>
-          <div class="mechanic">Attach a family wealth document — values, rules, and principles — to every capital transfer</div>
-          <div class="mechanic">Teach the bamboo principle to children from age 8 — the system only survives if they understand it</div>
+        <div class="table-container" style="margin-top: 3rem;">
+            <table>
+                <thead>
+                    <tr><th>You Give</th><th>You Get</th><th>Key Insight</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Value (products/services)</td><td>Money</td><td>Solve bigger problems = more value = more money</td></tr>
+                    <tr><td>Time (labor/attention)</td><td>Wages/fees</td><td>Linear exchange — capped by hours in a day</td></tr>
+                    <tr><td>Trust (reputation/credibility)</td><td>Opportunities, premium pricing, partnerships</td><td>Trust is the multiplier — high trust = less time for more money</td></tr>
+                </tbody>
+            </table>
         </div>
-      </div>
-      <div class="card-why">
-        <div class="card-why-label">Why This Structure</div>
-        <p>Generational wealth fails in generation two because money was transferred without the philosophy. Your children need capital AND the mental operating system to protect it. This structure ensures both. Wealth without wisdom becomes a liability in the next generation's hands.</p>
-      </div>
-    </div>
+    </section>
+    <!-- Hard Work vs Smart Work -->
+    <section class="section-alt">
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">02 — Work Philosophy</div>
+                <h2 class="section-title">Hard Work vs. Smart Work</h2>
+                <p class="section-subtitle">The market rewards results and scarcity, not effort. Understanding the difference changes everything.</p>
+            </div>
 
-  </div>
+            <div class="table-container">
+                <table class="comparison-table">
+                    <thead><tr><th>Dimension</th><th>Hard Work</th><th>Smart Work</th></tr></thead>
+                    <tbody>
+                        <tr><td>Output</td><td>Linear (1 hour = 1 unit)</td><td>Exponential (system generates while you sleep)</td></tr>
+                        <tr><td>Scalability</td><td>Capped by your hours</td><td>Unlimited via tools, teams, code</td></tr>
+                        <tr><td>Market Pay</td><td>Commoditized (many can do it)</td><td>Scarce, premium-priced</td></tr>
+                        <tr><td>Nature</td><td>Effort-intensive</td><td>Leverage-intensive</td></tr>
+                        <tr><td>Time Independence</td><td>Stops when you stop</td><td>Continues without your presence</td></tr>
+                        <tr><td>Compounding</td><td>Linear pay</td><td>Exponential returns over time</td></tr>
+                    </tbody>
+                </table>
+            </div>
 
-  <div class="divider"><span>◆</span></div>
+            <div class="highlight-box" style="margin-top: 2rem;">
+                <p><strong style="color: #c9a84c;">Why Smart Work Pays More:</strong> The market pays for <em>results and scarcity</em>, not effort. Anyone can work hard; few can architect systems that generate results without effort. Smart work is about engineering disproportionate output from limited input.</p>
+            </div>
+        </div>
+    </section>
 
-  <!-- FAMILY COMMANDMENTS -->
-  <div class="section">
-    <div class="section-tag">The Rules</div>
-    <h2>Seven <em>Commandments</em> of the Bamboo Family</h2>
-    <p class="section-intro">These are the operating principles your household runs on. Both partners must agree to them — written, discussed, and revisited annually.</p>
-  </div>
+    <!-- Why Rich Children -->
+    <section class="section">
+        <div class="section-header">
+            <div class="section-number">03 — Advantage</div>
+            <h2 class="section-title">Why Rich Children Build Wealth Easier</h2>
+            <p class="section-subtitle">Wealth transfer begins at birth — not through malice, but through osmosis of language, network, and psychology.</p>
+        </div>
 
-  <div class="commandments">
-    <div class="commandment">
-      <span class="cmd-num">I</span>
-      <div class="cmd-text">
-        <strong>We Pay the Family First</strong>
-        Before lifestyle, celebration, or generosity to others — the family capital extraction happens. Always. The bamboo eats before the monkey plays.
-      </div>
-    </div>
-    <div class="commandment">
-      <span class="cmd-num">II</span>
-      <div class="cmd-text">
-        <strong>We Do Not Rescue Others at the Cost of Our Structures</strong>
-        Extended family pressure is the single greatest destroyer of middle-class Nigerian wealth. Generosity is honoured — but never from capital funds. Only from a pre-allocated "giving" portion of lifestyle income.
-      </div>
-    </div>
-    <div class="commandment">
-      <span class="cmd-num">III</span>
-      <div class="cmd-text">
-        <strong>Both Partners Have Full Visibility</strong>
-        No financial secrets between spouses. Both see all accounts, all balances, all deployments. Wealth hidden from a spouse is wealth one signature away from chaos.
-      </div>
-    </div>
-    <div class="commandment">
-      <span class="cmd-num">IV</span>
-      <div class="cmd-text">
-        <strong>We Review the Architecture Every 12 Months</strong>
-        Annual family financial meeting. Check what's working, what's underperforming, and what needs rebalancing. This is a family board meeting — not an argument about money.
-      </div>
-    </div>
-    <div class="commandment">
-      <span class="cmd-num">V</span>
-      <div class="cmd-text">
-        <strong>Lifestyle Inflates Only After Structures Are Funded</strong>
-        As income grows, the first beneficiary is the capital extraction — not the car, not the rent upgrade. Structures scale first. Lifestyle scales second.
-      </div>
-    </div>
-    <div class="commandment">
-      <span class="cmd-num">VI</span>
-      <div class="cmd-text">
-        <strong>We Document Everything</strong>
-        Every asset, every account, every investment — written, filed, and known by both partners. Death or incapacity should not create confusion. Your estate plan begins today, not when you are old.
-      </div>
-    </div>
-    <div class="commandment">
-      <span class="cmd-num">VII</span>
-      <div class="cmd-text">
-        <strong>We Teach the Children the System</strong>
-        Wealth is not passed. Systems are passed. Children who understand the bamboo principle before they are adults become the second generation that grows the wealth rather than spending it. This is the only true legacy.
-      </div>
-    </div>
-  </div>
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-icon">&#128483;</div>
+                <h3 class="card-title">Language Osmosis</h3>
+                <p class="card-text">Grow up hearing "assets," "liabilities," "cash flow" at dinner. These concepts are foreign to children of the poor, who hear "bills," "paycheck," and "debt."</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">&#129504;</div>
+                <h3 class="card-title">Problem Exposure</h3>
+                <p class="card-text">Poor children learn scarcity problems ("How do I stretch $50?"). Rich children learn abundance problems ("How do I deploy $50,000 to generate more?").</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">&#127760;</div>
+                <h3 class="card-title">Network Inheritance</h3>
+                <p class="card-text">They inherit relationships — mentors, investors, partners — through family networks. The poor start with zero network capital.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">&#127922;</div>
+                <h3 class="card-title">Risk Psychology</h3>
+                <p class="card-text">Rich children can afford to fail. They learn failure is data. Poor children learn failure is catastrophic — creating risk aversion that prevents wealth-building bets.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">&#9203;</div>
+                <h3 class="card-title">Time Horizon</h3>
+                <p class="card-text">Wealthy families teach delayed gratification measured in decades. Poor families often focus on surviving today.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">&#127968;</div>
+                <h3 class="card-title">Asset vs. Liability Mindset</h3>
+                <p class="card-text">Rich children learn to buy things that make money. Poor children learn to buy things that lose value because that's what's accessible.</p>
+            </div>
+        </div>
+    </section>
 
-  <div class="divider"><span>◆</span></div>
+    <!-- Mindset Shift -->
+    <section id="mindset" class="section-alt">
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">04 — Transformation</div>
+                <h2 class="section-title">The Critical Mindset Shift</h2>
+                <p class="section-subtitle">To attract more money, shift from a consumer/scarcity mindset to a creator/abundance mindset.</p>
+            </div>
 
-  <!-- CLOSING -->
-  <div class="closing">
-    <div class="closing-quote">
-      "The monkey performs at every event.<br>The bamboo collects at every event.<br>Build your family into the bamboo.<br>Then teach your children to plant more."
-    </div>
-    <div class="closing-attr">The Bamboo Principle — Family Wealth Architecture</div>
-  </div>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="mindset-shift">
+                    <div class="mindset-from">"I work for money"</div>
+                    <div class="mindset-arrow">&#8594;</div>
+                    <div class="mindset-to">"Money works for me"</div>
+                </div>
+                <div class="mindset-shift">
+                    <div class="mindset-from">"Save what's left"</div>
+                    <div class="mindset-arrow">&#8594;</div>
+                    <div class="mindset-to">"Invest first, spend what's left"</div>
+                </div>
+                <div class="mindset-shift">
+                    <div class="mindset-from">"I can't afford it"</div>
+                    <div class="mindset-arrow">&#8594;</div>
+                    <div class="mindset-to">"How can I afford it?"</div>
+                </div>
+                <div class="mindset-shift">
+                    <div class="mindset-from">"Job security"</div>
+                    <div class="mindset-arrow">&#8594;</div>
+                    <div class="mindset-to">"Income security via multiple streams"</div>
+                </div>
+                <div class="mindset-shift">
+                    <div class="mindset-from">"Money is evil"</div>
+                    <div class="mindset-arrow">&#8594;</div>
+                    <div class="mindset-to">"Money is a tool for impact"</div>
+                </div>
+                <div class="mindset-shift" style="border-bottom: none;">
+                    <div class="mindset-from">"I need a raise"</div>
+                    <div class="mindset-arrow">&#8594;</div>
+                    <div class="mindset-to">"I need to own the means of production"</div>
+                </div>
+            </div>
 
-</div>
+            <div class="highlight-box" style="margin-top: 3rem;">
+                <p><strong style="color: #c9a84c;">Core Shift:</strong> Stop being a node in someone else's value chain. Become the architect of your own value creation system. The wealthy don't just have money — they have <em>relationship capital</em>.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Luck & Destiny -->
+    <section class="section">
+        <div class="section-header">
+            <div class="section-number">05 — Philosophy</div>
+            <h2 class="section-title">Luck & Destiny</h2>
+            <p class="section-subtitle">Understanding what you can control and what you must work within.</p>
+        </div>
+
+        <div class="two-column">
+            <div>
+                <h3 style="font-family: Georgia, 'Times New Roman', serif; font-size: 1.5rem; margin-bottom: 1.5rem; color: #c9a84c;">Four Types of Luck</h3>
+                <ul class="styled-list">
+                    <li><strong>Blind luck</strong> — Random chance (winning a lottery). Uncontrollable.</li>
+                    <li><strong>Luck from motion</strong> — More shots = more makes. Manufacturable.</li>
+                    <li><strong>Luck from awareness</strong> — Preparation meets opportunity. Manufacturable.</li>
+                    <li><strong>Luck from uniqueness</strong> — Your specific skills attract specific opportunities. Manufacturable.</li>
+                </ul>
+                <p style="color: #a0a0a0; margin-top: 1rem; font-style: italic;">You cannot control blind luck, but you can manufacture luck types 2–4. The more valuable and visible you are, the "luckier" you become.</p>
+            </div>
+            <div>
+                <h3 style="font-family: Georgia, 'Times New Roman', serif; font-size: 1.5rem; margin-bottom: 1.5rem; color: #c9a84c;">Destiny: Architect vs. Programmed</h3>
+                <p style="color: #a0a0a0; margin-bottom: 1rem;"><strong>Divine programming</strong> may set the <em>boundaries</em> — your genetics, birthplace, era, certain talents or limitations.</p>
+                <p style="color: #a0a0a0; margin-bottom: 1rem;"><strong>Human agency</strong> determines <em>what you build within those boundaries</em>. Two people with identical circumstances can end up in vastly different destinations.</p>
+                <div class="highlight-box">
+                    <p>"You don't choose the land you're given, but you design the building. You don't choose the cards, but you play the hand. Destiny is not a destination — it's a range of possibilities, and your choices determine where in that range you land."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Leverage -->
+    <section id="leverage" class="section-alt">
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">06 — Multiplication</div>
+                <h2 class="section-title">Leverage</h2>
+                <p class="section-subtitle">Leverage is any tool that amplifies effort — small input, large output. Archimedes applied to wealth.</p>
+            </div>
+
+            <h3 style="font-family: Georgia, 'Times New Roman', serif; font-size: 1.5rem; margin-bottom: 1.5rem; color: #c9a84c;">High-Leverage Vehicles</h3>
+            <div class="table-container">
+                <table>
+                    <thead><tr><th>Vehicle</th><th>Leverage Type</th><th>Why It Works</th></tr></thead>
+                    <tbody>
+                        <tr><td>Business/Entrepreneurship</td><td>Labor + capital + systems</td><td>Other people's time and money work for you</td></tr>
+                        <tr><td>Investing (stocks, real estate)</td><td>Capital + compounding</td><td>Money makes money; exponential growth over time</td></tr>
+                        <tr><td>Technology/Software</td><td>Code (infinite scalability)</td><td>Build once, serve infinitely at near-zero marginal cost</td></tr>
+                        <tr><td>Media/Content</td><td>Distribution</td><td>One piece of content reaches millions</td></tr>
+                        <tr><td>Intellectual Property</td><td>Knowledge (license repeatedly)</td><td>Patents, books, courses — create once, sell forever</td></tr>
+                        <tr><td>Network/Brand</td><td>Relationship + reputation</td><td>Your name becomes a trust asset that attracts opportunity</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 style="font-family: Georgia, 'Times New Roman', serif; font-size: 1.5rem; margin: 3rem 0 1.5rem; color: #f87171;">Low/No-Leverage Vehicles</h3>
+            <div class="card-grid">
+                <div class="card" style="border-color: #f87171;">
+                    <h3 class="card-title" style="color: #f87171;">Hourly Wage Jobs</h3>
+                    <p class="card-text">1 hour = 1 hour of pay. No scalability. Your income dies when you stop working.</p>
+                </div>
+                <div class="card" style="border-color: #f87171;">
+                    <h3 class="card-title" style="color: #f87171;">Physical Labor Without Tools</h3>
+                    <p class="card-text">Output limited by human endurance. No multiplier effect.</p>
+                </div>
+                <div class="card" style="border-color: #f87171;">
+                    <h3 class="card-title" style="color: #f87171;">Low-Interest Savings</h3>
+                    <p class="card-text">Inflation often erodes value faster than interest accumulates.</p>
+                </div>
+                <div class="card" style="border-color: #f87171;">
+                    <h3 class="card-title" style="color: #f87171;">Freelancing Without Systems</h3>
+                    <p class="card-text">Better than a job, but still capped by your personal hours.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Can You Jump? -->
+    <section class="section">
+        <div class="section-header">
+            <div class="section-number">06a — Acceleration</div>
+            <h2 class="section-title">Can You Jump the Leverage Ladder?</h2>
+            <p class="section-subtitle">Yes — but not by skipping steps. By compressing them.</p>
+        </div>
+
+        <div class="two-column">
+            <div>
+                <h3 style="font-family: Georgia, 'Times New Roman', serif; font-size: 1.3rem; margin-bottom: 1.5rem; color: #c9a84c;">How to Compress the Timeline</h3>
+                <ul class="styled-list">
+                    <li><strong>Knowledge arbitrage</strong> — Learn what others at your level don't know</li>
+                    <li><strong>Network infiltration</strong> — Insert yourself into higher-leverage circles</li>
+                    <li><strong>Digital leverage at zero cost</strong> — Use free platforms to scale</li>
+                    <li><strong>Partnership climbing</strong> — Partner with someone who has what you lack</li>
+                    <li><strong>Asset-first thinking</strong> — Buy/build assets before you "feel ready"</li>
+                </ul>
+            </div>
+            <div>
+                <h3 style="font-family: Georgia, 'Times New Roman', serif; font-size: 1.3rem; margin-bottom: 1.5rem; color: #f87171;">Why Most People Can't Jump</h3>
+                <ul class="styled-list">
+                    <li><strong>No capital</strong> to buy leverage (real estate, teams, businesses)</li>
+                    <li><strong>No proof of competence</strong> — no one partners without track record</li>
+                    <li><strong>Time poverty</strong> — working 60 hours to survive leaves no time to build</li>
+                    <li><strong>Network isolation</strong> — don't know anyone who has jumped</li>
+                    <li><strong>Risk intolerance</strong> — one failure means eviction, not a lesson</li>
+                    <li><strong>Information gap</strong> — don't know which vehicle matches their situation</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 2rem;">
+            <p><strong style="color: #c9a84c;">The Honest Path:</strong> You don't jump from a job to owning a $10M business. You ladder up: <strong>Job &#8594; Side hustle &#8594; Freelance with premium pricing &#8594; Agency/team &#8594; Product/software &#8594; Investments.</strong> But what takes most people 20 years can take 5–7 if you ruthlessly eliminate consumption, reinvest 50%+ of income into skills and assets, build publicly so opportunities find you, and fail fast and cheap in your 20s.</p>
+        </div>
+    </section>
+    <!-- Wealth Equation -->
+    <section class="section-alt">
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">07 — The Formula</div>
+                <h2 class="section-title">The Wealth Equation Explained</h2>
+                <p class="section-subtitle">A formula for understanding why some build wealth and others don't.</p>
+            </div>
+
+            <div class="equation">
+                Wealth = (<span class="highlight">Value Created</span> &#215; <span class="highlight">Leverage</span> &#215; <span class="highlight">Time</span>) &#8722; (<span class="negative">Taxes</span> + <span class="negative">Lifestyle Inflation</span>)
+            </div>
+
+            <div class="card-grid" style="margin-top: 2rem;">
+                <div class="card">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #4ade80, #86efac);">&#128200;</div>
+                    <h3 class="card-title">Value Created</h3>
+                    <p class="card-text">"How much do people need what you do?" A heart surgeon creates massive value. A cashier creates limited value. The market pays accordingly.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #4ade80, #86efac);">&#9881;</div>
+                    <h3 class="card-title">Leverage</h3>
+                    <p class="card-text">"How many people can you help at once?" Teaching 1 student = low leverage. Teaching 10,000 via an online course = high leverage.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #4ade80, #86efac);">&#9200;</div>
+                    <h3 class="card-title">Time</h3>
+                    <p class="card-text">"How long can you keep this going?" A one-hit wonder vs. a 30-year career. Compounding needs decades, not days.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #f87171, #fca5a5);">&#127963;</div>
+                    <h3 class="card-title">Taxes</h3>
+                    <p class="card-text">Not just income tax — sales tax, property tax, inflation tax. The more you earn, the more sophisticated the extraction. The informed navigate; the uninformed pay maximum.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #f87171, #fca5a5);">&#128717;</div>
+                    <h3 class="card-title">Lifestyle Inflation</h3>
+                    <p class="card-text">You get a raise, buy a bigger car, eat at nicer restaurants. Your <em>wealth</em> doesn't grow — your <em>spending</em> does. This is the silent killer of wealth.</p>
+                </div>
+            </div>
+
+            <div class="table-container" style="margin-top: 3rem;">
+                <table class="comparison-table">
+                    <thead><tr><th>Person</th><th>Value</th><th>Leverage</th><th>Time</th><th>Taxes</th><th>Lifestyle</th><th>Wealth</th></tr></thead>
+                    <tbody>
+                        <tr><td>Person A (Job)</td><td>$100K/year</td><td>1&#215; (none)</td><td>10 years</td><td>30%</td><td>Spends all</td><td style="color: #f87171;"><strong>$0</strong></td></tr>
+                        <tr><td>Person B (Smart)</td><td>$100K/year</td><td>10&#215; (course)</td><td>10 years</td><td>20%</td><td>Lives on $50K</td><td style="color: #4ade80;"><strong>$9.3M</strong></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="text-align: center; color: #a0a0a0; margin-top: 1rem; font-style: italic;">Same person. Different leverage and discipline. Same inputs, vastly different outputs.</p>
+        </div>
+    </section>
+
+    <!-- Relationships & Networking -->
+    <section class="section">
+        <div class="section-header">
+            <div class="section-number">08 — Networks</div>
+            <h2 class="section-title">Relationships = Wealth Multiplier</h2>
+            <p class="section-subtitle">The wealthy don't just have money — they have relationship capital.</p>
+        </div>
+
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-icon">&#128274;</div>
+                <h3 class="card-title">Deal Flow</h3>
+                <p class="card-text">The best opportunities are shared in private networks before they reach the public. If you're reading about it in the news, it's already priced in.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">&#129309;</div>
+                <h3 class="card-title">Trust Compression</h3>
+                <p class="card-text">A warm introduction from a trusted person eliminates months of trust-building. One email can open doors that years of cold outreach cannot.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">&#128218;</div>
+                <h3 class="card-title">Knowledge Transfer</h3>
+                <p class="card-text">You learn what books don't teach through people who've done it. The nuances, the pitfalls, the timing — this is oral tradition among the wealthy.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">&#128188;</div>
+                <h3 class="card-title">Partnership & Capital</h3>
+                <p class="card-text">Most significant wealth is built through collaboration, not solo effort. You need partners for skills you lack and capital you don't have.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">&#129496;</div>
+                <h3 class="card-title">Emotional Resilience</h3>
+                <p class="card-text">Wealth building is psychologically brutal. Relationships provide the support to persist when every instinct says to quit.</p>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 3rem;">
+            <h3 style="font-family: Georgia, 'Times New Roman', serif; color: #c9a84c; margin-bottom: 1rem;">Networking Done Right</h3>
+            <p>Networking is <strong>not</strong> collecting contacts. Networking is building <em>relational equity</em> — a reservoir of trust, value given, and mutual benefit that you can draw upon when needed.</p>
+            <ul class="styled-list" style="margin-top: 1rem;">
+                <li><strong>Lead with value, not need</strong> — Don't approach with "I need..." Approach with "Here's something that might help."</li>
+                <li><strong>Be genuinely curious</strong> — Ask about their challenges, not their success. Remember details. Follow up.</li>
+                <li><strong>Connect others</strong> — The most powerful networkers are <em>connectors</em>. They introduce A to B and create value they never capture directly.</li>
+                <li><strong>Show up consistently</strong> — One conference won't build a network. Years of presence and contribution will.</li>
+                <li><strong>Have something to offer</strong> — You can't network effectively if you have no skills, knowledge, or resources to exchange.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- The Informed vs Uninformed -->
+    <section id="transfers" class="section-alt">
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">09 — The Real Game</div>
+                <h2 class="section-title">The Informed vs. The Uninformed</h2>
+                <p class="section-subtitle">Wealth does not just grow — it transfers. The primary pipeline is information asymmetry.</p>
+            </div>
+
+            <div class="highlight-box">
+                <p style="font-size: 1.1rem; text-align: center; font-style: italic;">"The uninformed pay for their mistakes to the informed and prepared."</p>
+                <p style="text-align: center; color: #666666; margin-top: 1rem;">This is not conspiracy. It is structural. It is how markets, systems, and power have always worked.</p>
+            </div>
+
+            <h3 style="font-family: Georgia, 'Times New Roman', serif; font-size: 1.5rem; margin: 3rem 0 1.5rem; color: #c9a84c;">How the Wealthy Profit from the Uninformed</h3>
+
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">&#127891;</div>
+                    <h3 class="card-title">1. The Knowledge Tax</h3>
+                    <p class="card-text">Every financial decision made without full understanding pays a hidden tax to those who do understand. Buy liabilities thinking they're assets. Pay high fees for simple products. Panic-sell at bottoms. The informed collect.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">&#9201;</div>
+                    <h3 class="card-title">2. The Timing Arbitrage</h3>
+                    <p class="card-text">The wealthy know <em>when</em> to act before the masses. They access deals through private networks. They sell into euphoria and buy into panic. Retail investors hear about opportunities on the news — already priced in.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">&#128302;</div>
+                    <h3 class="card-title">3. The Complexity Premium</h3>
+                    <p class="card-text">The more complex a product, the larger the information gap, and the more profit extracted. Index funds: 0.03% fee. Structured products: 2–5% fee + hidden costs. The wealthy <em>create</em> complexity to extract rent.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">&#129504;</div>
+                    <h3 class="card-title">4. The Behavior Harvest</h3>
+                    <p class="card-text">Human psychology has predictable flaws. The informed design systems to harvest them. FOMO &#8594; artificial scarcity. Loss aversion &#8594; overpriced "protection." Present bias &#8594; 30% APR payday loans.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">&#9878;</div>
+                    <h3 class="card-title">5. Regulatory & Legal Asymmetry</h3>
+                    <p class="card-text">The wealthy afford lawyers, accountants, lobbyists who write rules that appear neutral but favor those with resources. Capital gains: 0–15%. Salary: 35–40%. Both legal. One knows how to structure income; the other doesn't.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">&#128065;</div>
+                    <h3 class="card-title">6. The Attention Economy</h3>
+                    <p class="card-text">Your attention is worth $200–300/year to platforms. The uninformed gives it away scrolling for hours. The informed owns the platforms and sells the attention to advertisers. You pay with life hours; they collect revenue.</p>
+                </div>
+            </div>
+
+            <h3 style="font-family: Georgia, 'Times New Roman', serif; font-size: 1.5rem; margin: 3rem 0 1.5rem; color: #c9a84c;">The Wealth Transfer Cycle</h3>
+            <div class="transfer-cycle">
+                <div class="cycle-box cycle-informed">
+                    <div class="cycle-label">Informed / Prepared</div>
+                    <p>Extracts knowledge, timing, complexity, behavior, legal, and attention advantages</p>
+                </div>
+                <div class="cycle-arrow">&#8645;</div>
+                <div class="cycle-box cycle-uninformed">
+                    <div class="cycle-label">Uninformed / Unprepared</div>
+                    <p>Pays through bad decisions, fees, panic, complexity, psychological flaws, taxes, and attention</p>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 2rem;">
+                <p style="text-align: center; font-size: 1.1rem;"><strong style="color: #c9a84c;">This cycle is not malicious — it is mechanical.</strong> Markets and systems reward preparation and punish ignorance. The wealthy are not necessarily smarter; they are <em>better informed, better networked, and better positioned.</em></p>
+            </div>
+        </div>
+    </section>
+    <!-- Current Wealth Transfers -->
+    <section class="section">
+        <div class="section-header">
+            <div class="section-number">10 — Now</div>
+            <h2 class="section-title">Current Large Wealth Transfers (2026)</h2>
+            <p class="section-subtitle">Three massive, simultaneous transfers are underway. The question is which side of the pipeline you stand on.</p>
+        </div>
+
+        <div class="transfer-card">
+            <div class="transfer-number">Transfer #1</div>
+            <h3 class="transfer-title">The Great Generational Wealth Transfer</h3>
+            <div class="transfer-amount">$84–124 Trillion</div>
+            <p style="color: #a0a0a0; margin-bottom: 1rem;">The largest in human history. Assets transferring from Baby Boomers and Silent Generation to Gen X, Millennials, and Gen Z through 2048. In 2026 alone, an estimated <strong style="color: #c9a84c;">$6 trillion</strong> changes hands as 1.1 billion baby boomers worldwide hit age 80.</p>
+            <p style="color: #a0a0a0; margin-bottom: 1rem;">Millennials have already <strong>quadrupled their net worth</strong> from $3.9T to nearly $16T between 2019–2024, largely through early inheritance and asset appreciation.</p>
+            <p style="color: #f87171; font-style: italic;">The catch: The wealthiest 2% of households will generate over 50% of these transfers ($62T). This is not a broad middle-class windfall — it is concentrated at the top.</p>
+            <div class="transfer-meta">
+                <div class="meta-box meta-win">
+                    <div class="meta-label">Who Profits</div>
+                    Heirs (if they keep it), estate attorneys, wealth managers, tax planners, life insurance companies
+                </div>
+                <div class="meta-box meta-lose">
+                    <div class="meta-label">Who Pays</div>
+                    Non-inheriting majority facing inflated asset prices as inherited capital chases limited opportunities
+                </div>
+            </div>
+        </div>
+
+        <div class="transfer-card">
+            <div class="transfer-number">Transfer #2</div>
+            <h3 class="transfer-title">The AI-Driven Wealth Transfer</h3>
+            <div class="transfer-amount">From Labor to Capital</div>
+            <p style="color: #a0a0a0; margin-bottom: 1rem;">AI is creating a <strong>"winner-take-all" concentration</strong> where productivity gains flow to a small group of platform owners and investors, while wages for routine cognitive and physical labor stagnate or decline.</p>
+            <p style="color: #a0a0a0; margin-bottom: 1rem;"><strong>Agentic AI</strong> (autonomous AI systems) is replacing not just manual work but professional judgment — compliance, portfolio management, legal research — threatening the middle-class knowledge worker.</p>
+            <p style="color: #a0a0a0;">The debate: <strong>Redistribution</strong> (UBI, windfall taxes after the fact) vs. <strong>Predistribution</strong> (giving people access to AI tools and infrastructure <em>before</em> inequality hardens).</p>
+            <div class="transfer-meta">
+                <div class="meta-box meta-win">
+                    <div class="meta-label">Who Profits</div>
+                    AI company shareholders (Nvidia, Microsoft, OpenAI), tech-savvy entrepreneurs who use AI to replace labor, private equity investing in automation
+                </div>
+                <div class="meta-box meta-lose">
+                    <div class="meta-label">Who Pays</div>
+                    Workers whose skills are automated, small businesses that can't afford AI infrastructure, consumers of AI-mediated services that extract data rent
+                </div>
+            </div>
+        </div>
+
+        <div class="transfer-card">
+            <div class="transfer-number">Transfer #3</div>
+            <h3 class="transfer-title">The Tax & Regulatory Wealth Transfer</h3>
+            <div class="transfer-amount">Time-Bound Information Arbitrage</div>
+            <p style="color: #a0a0a0; margin-bottom: 1rem;">In the US, the <strong>estate tax exemption drops from ~$13.9M to ~$7M per person in 2026</strong> due to the 2017 tax cut sunset. Wealthy families are rushing to transfer assets into irrevocable trusts, GRATs, and life insurance structures before the window closes.</p>
+            <p style="color: #a0a0a0; margin-bottom: 1rem;"><strong>$15M per individual</strong> (or $30M for married couples) can still be transferred tax-efficiently if structured before January 2026.</p>
+            <p style="color: #f87171; font-style: italic;">This is a time-bound information arbitrage: Those who know the deadline and have estate attorneys are moving wealth now. Those who don't will pay 40%+ estate taxes later.</p>
+            <div class="transfer-meta">
+                <div class="meta-box meta-win">
+                    <div class="meta-label">Who Profits</div>
+                    Families with estate planners, trust attorneys, life insurance specialists who structure ahead of the deadline
+                </div>
+                <div class="meta-box meta-lose">
+                    <div class="meta-label">Who Pays</div>
+                    Families who discover the tax change after a death, when it's too late to restructure — paying maximum estate tax
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 2rem;">
+            <h3 style="font-family: Georgia, 'Times New Roman', serif; color: #c9a84c; margin-bottom: 1rem;">The Common Thread</h3>
+            <p>In every case, <strong>information, preparation, and access to professional advice</strong> determine whether you are on the receiving or paying end of the transfer. The three transfers are connected: generational transfer provides the capital, AI multiplies it for those who own the technology, and tax policy determines how much the state extracts versus how much stays in private hands.</p>
+        </div>
+    </section>
+    <!-- Strategy -->
+    <section id="strategy" class="section-alt">
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">11 — Defense</div>
+                <h2 class="section-title">How to Stop Being the Uninformed</h2>
+                <p class="section-subtitle">Your defense is not outrage. Your defense is information, preparation, and positioning.</p>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead><tr><th>Shift</th><th>Action</th></tr></thead>
+                    <tbody>
+                        <tr><td>From consumer to student</td><td>Before any major financial decision, spend 10+ hours learning</td></tr>
+                        <tr><td>From follower to skeptic</td><td>Ask: "Who profits from me believing this?"</td></tr>
+                        <tr><td>From complexity to simplicity</td><td>If you don't understand it in 5 minutes, don't buy it</td></tr>
+                        <tr><td>From urgency to patience</td><td>"Limited time" offers are designed to bypass your thinking</td></tr>
+                        <tr><td>From isolation to network</td><td>Join communities where financial literacy is normal</td></tr>
+                        <tr><td>From earned income to owned assets</td><td>Stop trading time; start owning cash-flowing assets</td></tr>
+                        <tr><td>From short-term to long-term</td><td>The informed play decades; the uninformed play days</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="two-column" style="margin-top: 3rem;">
+                <div class="highlight-box">
+                    <h3 style="font-family: Georgia, 'Times New Roman', serif; color: #f87171; margin-bottom: 1rem;">The Uninformed Pay Tuition Through:</h3>
+                    <ul class="styled-list">
+                        <li>Bad investments</li>
+                        <li>High fees</li>
+                        <li>Missed opportunities</li>
+                        <li>Tax inefficiency</li>
+                        <li>Predatory products</li>
+                        <li>Lifestyle inflation</li>
+                        <li>Panic decisions</li>
+                    </ul>
+                </div>
+                <div class="highlight-box">
+                    <h3 style="font-family: Georgia, 'Times New Roman', serif; color: #4ade80; margin-bottom: 1rem;">The Informed Collect As:</h3>
+                    <ul class="styled-list">
+                        <li>Investment returns</li>
+                        <li>Fee income</li>
+                        <li>Deal flow</li>
+                        <li>Tax savings</li>
+                        <li>Premium pricing</li>
+                        <li>Asset appreciation</li>
+                        <li>Behavioral arbitrage</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="equation" style="margin-top: 3rem;">
+                <p style="font-size: 1.2rem; color: #a0a0a0; margin-bottom: 1rem;">The Ultimate Asymmetry</p>
+                <p style="font-family: Georgia, 'Times New Roman', serif; font-style: italic; color: #c9a84c;">"The single greatest investment you can make is in your own education — because the return is infinite, and the alternative is paying tuition to the informed for the rest of your life."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Synthesis -->
+    <section class="section">
+        <div class="section-header">
+            <div class="section-number">12 — Synthesis</div>
+            <h2 class="section-title">The Final Comparison</h2>
+            <p class="section-subtitle">Two mindsets. Two destinies. The game is learnable — if you choose to play.</p>
+        </div>
+
+        <div class="table-container">
+            <table class="comparison-table">
+                <thead><tr><th style="color: #f87171;">The Uninformed</th><th style="color: #4ade80;">The Informed</th></tr></thead>
+                <tbody>
+                    <tr><td>Pays for mistakes</td><td>Profits from others' mistakes</td></tr>
+                    <tr><td>Consumes information</td><td>Produces and monetizes information</td></tr>
+                    <tr><td>Reacts to events</td><td>Anticipates and shapes events</td></tr>
+                    <tr><td>Trades time for money</td><td>Trades money for time and leverage</td></tr>
+                    <tr><td>Builds liabilities</td><td>Builds assets</td></tr>
+                    <tr><td>Seeks comfort</td><td>Seeks optionality</td></tr>
+                    <tr><td>Follows the crowd</td><td>Leads or exits before the crowd</td></tr>
+                    <tr><td>Pays the knowledge tax</td><td>Collects the knowledge premium</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-quote">"The game is not fair. But it is learnable. And the first move is recognizing that you are in it whether you chose to play or not."</p>
+        <p class="footer-text">Wealth is not stolen. It is graduated — from those who don't understand the game to those who do. Your move.</p>
+    </footer>
+    <!-- Strategy -->
+    <section id="strategy" class="section-alt">
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">11 — Defense</div>
+                <h2 class="section-title">How to Stop Being the Uninformed</h2>
+                <p class="section-subtitle">Your defense is not outrage. Your defense is information, preparation, and positioning.</p>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead><tr><th>Shift</th><th>Action</th></tr></thead>
+                    <tbody>
+                        <tr><td>From consumer to student</td><td>Before any major financial decision, spend 10+ hours learning</td></tr>
+                        <tr><td>From follower to skeptic</td><td>Ask: "Who profits from me believing this?"</td></tr>
+                        <tr><td>From complexity to simplicity</td><td>If you don't understand it in 5 minutes, don't buy it</td></tr>
+                        <tr><td>From urgency to patience</td><td>"Limited time" offers are designed to bypass your thinking</td></tr>
+                        <tr><td>From isolation to network</td><td>Join communities where financial literacy is normal</td></tr>
+                        <tr><td>From earned income to owned assets</td><td>Stop trading time; start owning cash-flowing assets</td></tr>
+                        <tr><td>From short-term to long-term</td><td>The informed play decades; the uninformed play days</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="two-column" style="margin-top: 3rem;">
+                <div class="highlight-box">
+                    <h3 style="font-family: Georgia, 'Times New Roman', serif; color: #f87171; margin-bottom: 1rem;">The Uninformed Pay Tuition Through:</h3>
+                    <ul class="styled-list">
+                        <li>Bad investments</li>
+                        <li>High fees</li>
+                        <li>Missed opportunities</li>
+                        <li>Tax inefficiency</li>
+                        <li>Predatory products</li>
+                        <li>Lifestyle inflation</li>
+                        <li>Panic decisions</li>
+                    </ul>
+                </div>
+                <div class="highlight-box">
+                    <h3 style="font-family: Georgia, 'Times New Roman', serif; color: #4ade80; margin-bottom: 1rem;">The Informed Collect As:</h3>
+                    <ul class="styled-list">
+                        <li>Investment returns</li>
+                        <li>Fee income</li>
+                        <li>Deal flow</li>
+                        <li>Tax savings</li>
+                        <li>Premium pricing</li>
+                        <li>Asset appreciation</li>
+                        <li>Behavioral arbitrage</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="equation" style="margin-top: 3rem;">
+                <p style="font-size: 1.2rem; color: #a0a0a0; margin-bottom: 1rem;">The Ultimate Asymmetry</p>
+                <p style="font-family: Georgia, 'Times New Roman', serif; font-style: italic; color: #c9a84c;">"The single greatest investment you can make is in your own education — because the return is infinite, and the alternative is paying tuition to the informed for the rest of your life."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Synthesis -->
+    <section class="section">
+        <div class="section-header">
+            <div class="section-number">12 — Synthesis</div>
+            <h2 class="section-title">The Final Comparison</h2>
+            <p class="section-subtitle">Two mindsets. Two destinies. The game is learnable — if you choose to play.</p>
+        </div>
+
+        <div class="table-container">
+            <table class="comparison-table">
+                <thead><tr><th style="color: #f87171;">The Uninformed</th><th style="color: #4ade80;">The Informed</th></tr></thead>
+                <tbody>
+                    <tr><td>Pays for mistakes</td><td>Profits from others' mistakes</td></tr>
+                    <tr><td>Consumes information</td><td>Produces and monetizes information</td></tr>
+                    <tr><td>Reacts to events</td><td>Anticipates and shapes events</td></tr>
+                    <tr><td>Trades time for money</td><td>Trades money for time and leverage</td></tr>
+                    <tr><td>Builds liabilities</td><td>Builds assets</td></tr>
+                    <tr><td>Seeks comfort</td><td>Seeks optionality</td></tr>
+                    <tr><td>Follows the crowd</td><td>Leads or exits before the crowd</td></tr>
+                    <tr><td>Pays the knowledge tax</td><td>Collects the knowledge premium</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-quote">"The game is not fair. But it is learnable. And the first move is recognizing that you are in it whether you chose to play or not."</p>
+        <p class="footer-text">Wealth is not stolen. It is graduated — from those who don't understand the game to those who do. Your move.</p>
+    </footer>
+    <script>
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Fade in cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card, .transfer-card, .highlight-box').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Nav background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(10, 10, 10, 0.98)';
+            } else {
+                nav.style.background = 'rgba(10, 10, 10, 0.95)';
+            }
+        });
+    </script>
+
 </body>
 </html>
